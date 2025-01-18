@@ -2,7 +2,6 @@
 
 file_name=".grocery_db.txt"
 
-data=()
 
 
 
@@ -38,8 +37,8 @@ add(){
     while true; do
         echo -e "\n\nPlease enter the quantity of the Item: "
         read item_qty
-        item_qty=${item_qty:-"-1"}
-        if [[ "$item_qty" =~ ^-?[0-9]+$ ]]; then
+        item_qty=${item_qty:-"N/A"}
+        if [[  "$item_qty" =~ ^[0-9]+$ || "$item_qty" == "N/A" ]]; then
             break
         else 
             echo -e "\nInvalid quantity $item_qty. Please Enter a valid Quantity."
@@ -72,10 +71,11 @@ display(){
 
 total(){
     total=0
-    for item in "${data[@]}"
-    do
-        read -r _ price _ <<< "$item"
-        total=$(echo "$total + $price" | bc) 
+    for item in "${data[@]}"; do
+        item_price=$(echo "$item" | awk '{print $3}')
+        if [[ "$item_price" =~ ^-?[0-9]+(\.[0-9]+)?$ ]]; then
+            total=$(echo "$total + $item_price" | bc)
+        fi
     done
     echo $total
 }
@@ -242,7 +242,7 @@ main_loop() {
                 echo -e "\033c"
                 echo -e "\n\033[1mSearching List\033[0m\n"
                 read -p "What would you like to search for? " target
-                search $target 1
+                search $target 0
                 for i in $(seq 1 30); do
                     echo
                 done ;;
@@ -255,7 +255,7 @@ main_loop() {
                 echo -e "\n\033[1mClear List\033[0m\n"
                 clear ;;
             7)
-                echo "Exiting..."  
+                echo -e "\033c"
                 break ;;
             *)
                 echo "BYE"

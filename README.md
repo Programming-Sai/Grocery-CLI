@@ -28,10 +28,14 @@ To get started with the **Grocery-CLI**, follow these simple steps:
 
 Before running the script, you need to give it executable permissions.
 
-In your terminal, navigate to the directory where the `grocery_easy.sh` file is located, then run:
+In your terminal, navigate to the directory where the `grocery_easy.sh` or `grocery_dev.sh` file is located, then run:
 
 ```
 chmod +x grocery_easy.sh
+
+# OR
+
+chmod +x grocery_dev.sh
 ```
 
 ### 3. **Run the Script**
@@ -40,13 +44,18 @@ Once the script is executable, you can run it directly in your terminal:
 
 ```
 ./grocery_easy.sh
+
+# OR
+
+./grocery_dev.sh <command> [options]
+
 ```
 
 The script will start, and you will be guided through the available commands.
 
 ---
 
-## Easy Section (Beginner Mode)
+## Easy Section (Non-Dev Mode)
 
 ![Welcome Screen](./img/welcome.png)
 
@@ -134,4 +143,124 @@ The **Easy Section** is designed for users who prefer a simple and intuitive int
    Storage Cleared
    ```
 
-This section makes it easy for beginners to quickly start managing their grocery lists without getting into the complexities of the more advanced features.
+This section makes it easy for non-dev users to quickly start managing their grocery lists without getting into the complexities of the more advanced features.
+
+---
+
+## Dev Mode
+
+Dev Mode allows you to run the grocery tool in a more advanced, command-line style, similar to how version control tools like Git are used. It provides a more flexible and hands-on experience, where users interact directly with commands and options, enabling efficient management of tasks like adding, displaying, and deleting items in the grocery list. This mode is suited for users who are familiar with command-line interfaces and prefer a more granular control over their operations.
+
+### Commands in Dev Mode
+
+The following commands are available in Dev mode:
+
+#### 1. **add** `<item_name>` `<item_price>` `<item_quantity>`
+
+- Adds a new item to the grocery list.
+- **Parameters**:
+  - `item_name`: The name of the grocery item (e.g., "Apples").
+  - `item_price`: The price per unit of the item (e.g., "2.5").
+  - `item_quantity`: The number of items being added to the list (can be a positive integer or `-1` for undefined quantity).
+- Example:
+  ```bash
+  ./grocery_dev.sh add "Apples" 2.5 10
+  ```
+
+#### 2. **display**
+
+- Displays the list of all items currently in the grocery list with their quantities and prices.
+
+#### 3. **search** `<item_name>`
+
+- Searches for an item by its name and displays its details (if it exists in the list).
+- Example:
+  ```bash
+  ./grocery_dev.sh search "Apples"
+  ```
+
+#### 4. **delete** `<item_name>`
+
+- Deletes an item from the grocery list based on the specified name.
+- Example:
+  ```bash
+  ./grocery_dev.sh delete "Apples"
+  ```
+
+#### 5. **total**
+
+- Displays the total cost of all items in the grocery list.
+- Example:
+  ```bash
+  ./grocery_dev.sh total
+  ```
+
+#### 6. **clear**
+
+- Clears all items from the grocery list. This command removes all records from the list, so be careful when using it.
+- Example:
+  ```bash
+  ./grocery_dev.sh clear
+  ```
+
+#### 7. **--help** or **-h**
+
+- Displays a help message detailing the usage of the Dev mode commands.
+- Example:
+  ```bash
+  ./grocery_dev.sh --help
+  ```
+
+### Debugging and Error Handling
+
+Dev Mode will show detailed messages when errors occur or invalid inputs are provided, helping you identify and fix issues quickly.
+
+For example:
+
+- If you enter a non-numeric value for price or quantity, you'll get a helpful error message indicating the issue.
+- Missing or incorrect arguments will result in a usage guide being displayed, showing the correct format for the command.
+
+### Example Usage in Dev Mode
+
+1. **Adding Items**:
+
+   ```bash
+   ./grocery_dev.sh add "Tomatoes" 3.5 10
+   ```
+
+2. **Displaying Items**:
+
+   ```bash
+   ./grocery_dev.sh display
+   ```
+
+3. **Calculating Total**:
+
+   ```bash
+   ./grocery_dev.sh total
+   ```
+
+4. **Searching for an Item**:
+
+   ```bash
+   ./grocery_dev.sh search "Tomatoes"
+   ```
+
+5. **Deleting an Item**:
+
+   ```bash
+   ./grocery_dev.sh delete "Tomatoes"
+   ```
+
+6. **Clearing the List**:
+
+   ```bash
+   ./grocery_dev.sh clear
+   ```
+
+7. **Help Command**:
+   ```bash
+   ./grocery_dev.sh --help
+   ```
+
+---
